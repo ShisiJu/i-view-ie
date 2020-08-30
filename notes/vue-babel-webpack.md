@@ -1,4 +1,4 @@
-# vue-cli 
+# vue-cli 打包命令探索
 
 vue-cli 是一个很好的工具. 它帮助我们集成了babel和webpack, 以及一些常用的插件.
 让我们不用过多的关心配置, 专心业务.
@@ -10,9 +10,7 @@ vue-cli 是一个很好的工具. 它帮助我们集成了babel和webpack, 以�
 
 ## 前言
 
-简单说一些
-
-有一些知识, 如果了解会更好.
+文章涉及到一些常用的库, 大家可以先简单了解一下, 再看文章可能会更好理解.
 
 ### webpack
 
@@ -22,7 +20,6 @@ vue-cli 是一个很好的工具. 它帮助我们集成了babel和webpack, 以�
 
 webpack 通过插件和loader, 来进行打包的处理. 非常的灵活.
 但是, webpack的配置是一件极其复杂而笨重的事情.
-
 
 ### webpack-chain
 
@@ -46,7 +43,6 @@ const output = merge(
 console.log(output);
 // { color: "red", fruit: "strawberries"}
 ```
-
 
 ### babel
 
@@ -75,7 +71,6 @@ vue-cli 配置webpack可以通过vue.config.js中
 
 1. configureWebpack 简单的配置方式, 合并默认配置
 2. chainWebpack 链式操作 (高级)
-
 
 
 ## 从命令入手
@@ -127,7 +122,7 @@ service.run(command, args, rawArgv).catch(err => {
 此时, 我们便清晰了. 想要知道怎么打包的,
 那我们就要去看看 `Service` 到底做了什么.
 
-## 神奇的Service
+## Service
 
 代码的位置 
 `node_modules\@vue\cli-service\lib\Service.js`
@@ -140,8 +135,6 @@ service.run(command, args, rawArgv).catch(err => {
 ```bash
 vue inspect > output.js
 ```
-
-https://github.com/neutrinojs/webpack-chain
 
 ### 初始化service
 
@@ -200,7 +193,7 @@ vue-cli 在打包时, 会读取项目中 package.json 中 `@vue/cli-plugin`开�
 
 ### cli-plugin-babel
 
-我们以加载vue的babel插件为例
+我们以加载vue的babel插件为例, 看看插件做了哪些配置.
 
 ```js
 module.exports = (api, options) => {
@@ -253,7 +246,7 @@ module.exports = (api, options) => {
 }
 ```
 
-通过jsRule(具名module), 来配置babel-loader. 
+通过jsRule(具名rule, 由webpack-chain 提供的方法), 来配置babel-loader. 
 
 
 ### 执行run
@@ -377,4 +370,4 @@ vue-cli 帮我们做了很多配置上的处理. 使用它的默认配置, 往�
 
 当然, 如果需要更多灵活地配置, 就需要了解一些代码上的处理.
 
-
+代码部分, 我只讲了大致流程. 如果想看详细的代码, 可以自己在一个 vue项目中查看.
