@@ -5,6 +5,8 @@ module.exports = {
       // 为生产环境修改配置...
     } else {
       // 为开发环境修改配置...
+      // config 是webpack的配置项
+      console.log(config);
     }
   },
   chainWebpack: config => {
@@ -17,6 +19,11 @@ module.exports = {
         return options
       })
 
-      
+    config.module.rule('js')
+      .include
+      .add('src')
+      .add('test')
+      .end()
+
   }
 }
