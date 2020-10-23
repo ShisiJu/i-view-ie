@@ -1,5 +1,9 @@
 # iview 兼容IE9 
 
+在IE9上简单测试过, 没有报错信息;
+如果发现, 可以提issue; 
+
+
 IE9 本身就有一些js 上的兼容性问题
 在 src/lib/compat_ie 文件中统一处理了
 
@@ -30,4 +34,16 @@ module.exports = {
     ],
   ],
 };
+```
+
+
+要在 package.json 中指定 browserslist 
+不然, polyfill 也会不全
+
+```js
+"browserslist": [
+  "> 0.1%",
+  "last 3 versions",
+  "not ie <= 8"
+]
 ```
