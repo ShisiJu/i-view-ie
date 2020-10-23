@@ -1,29 +1,7 @@
 // https://cli.vuejs.org/zh/config/#vue-config-js
 module.exports = {
-  configureWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      // 为生产环境修改配置...
-    } else {
-      // 为开发环境修改配置...
-      // config 是webpack的配置项
-      console.log(config);
-    }
-  },
-  chainWebpack: config => {
-    config.module
-      .rule('vue')
-      .use('vue-loader')
-      .loader('vue-loader')
-      .tap(options => {
-        // 修改它的选项...
-        return options
-      })
-
-    config.module.rule('js')
-      .include
-      .add('src')
-      .add('test')
-      .end()
-
-  }
-}
+  // 4.4.0 版本的 view-design 修复了一些编译上的bug
+  // 老版本的可能需要特殊编译一下 locale
+  //resolve('node_modules/view-design/src/locale')
+  transpileDependencies: ["view-design/src/locale"],
+};
